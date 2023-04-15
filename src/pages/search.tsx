@@ -1,11 +1,9 @@
-import {AppBar, Box, Checkbox, Grid, Hidden, IconButton, Skeleton, TextField} from "@mui/material";
+import {Box, Grid, Hidden,} from "@mui/material";
 import {useEffect, useRef, useState} from "react";
-import TuneIcon from '@mui/icons-material/Tune';
-import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from '@mui/icons-material/Close';
-import StarIcon from '@mui/icons-material/Star';
 import {brandData, productDataGenerator, starData} from "@/utils/productDataHelper";
 import AllFilters from "@/components/AllFilters";
+import Navbar from "@/components/Navbar";
+import ProductCard from "@/components/ProductCard";
 
 const Index = () => {
 
@@ -48,84 +46,43 @@ const Index = () => {
 
     return (
         <>
-            <AppBar
-                color={"transparent"}
-                elevation={0}
-                position="fixed"
-            >
-                <Box p={2} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-                    <Hidden mdUp>
-                        <IconButton>
-                            <TuneIcon />
-                        </IconButton>
-                        <Box mr={2} />
+            <Navbar search={search} setSearch={setSearch} mainRef={mainRef} filter={filter} setFilter={setFilter} />
+            <Box width={'100%'} mt={10}>
+                <Grid container spacing={0} height={'auto'}>
+                    <Hidden mdDown>
+                        <Grid item xs={0} md={2.5} height={'90vh'} overflow={'hidden'}>
+                            <Box width={'100%'} overflow={'hidden'} height={'90vh'}>
+                                <AllFilters mainRef={mainRef} filter={filter} setFilter={setFilter} />
+                            </Box>
+                        </Grid>
                     </Hidden>
-                    <TextField
-                        sx={{
-                            background: "#FFF",
-                            py: 1,
-                            px: 2,
-                            borderRadius: "10px",
-                            width: { lg: "500px", md: "500px", xs: "100%" },
-                            boxShadow: "0px 4px 31px rgba(0, 0, 0, 0.08)",
-                            border: '0.3px solid #000'
-                        }}
-                        variant="standard"
-                        size={"small"}
-                        placeholder={"Search"}
-                        value={search}
-                        onChange={(event) => {
-                            setSearch(event.target.value);
-                        }}
-                        InputProps={{
-                            startAdornment: <SearchIcon sx={{mr: 2}} />,
-                            disableUnderline: true,
-                            endAdornment: (
-                                <>
-                                    {search.length > 0 && (
-                                        <Box pt={0.5} onClick={() => setSearch('')}>
-                                            <CloseIcon sx={{color: 'red'}} />
-                                        </Box>
-                                    )}
-                                </>
-                            ),
-                        }}
-                    />
-                </Box>
-            </AppBar>
-           <Box width={'100%'} mt={10}>
-               <Grid container spacing={0} height={'auto'}>
-                   <Hidden mdDown>
-                       <Grid item xs={0} md={2.5} height={'90vh'} overflow={'hidden'}>
-                           <AllFilters mainRef={mainRef} filter={filter} setFilter={setFilter} />
-                       </Grid>
-                   </Hidden>
-                   <Grid item xs={12} md={9.5}>
-                       <Box width={'100%'} ref={mainRef}>
-                           <Grid container spacing={2}>
-                               {
-                                   data.map((each) => (
-                                       <Grid key={each.id} item xs={12} sm={6} md={4}>
-                                           <Box bgcolor={'#e5e5e5'} width={'100%'} borderRadius={'15px'} overflow={'hidden'}>
-                                               {/*{loading && <Skeleton variant="rectangular" width={'100%'} height={283} />}*/}
-                                               <img src={each.img} alt={each.brand} width={'100%'} />
-                                               <Box p={2}>
-                                                   <h4>{each.name}</h4>
-                                                   <p>Price: ${each.sellingPrice}</p>
-                                                   <p>Brand: {each.brand}</p>
-                                                   <p>Rating: {each.rating}</p>
-                                               </Box>
+                    <Grid item xs={12} md={9.5}>
+                        <Box width={'100%'} ref={mainRef} height={'calc(100vh - 78px)'} overflow={'scroll'}>
 
-                                               {/*<p>Rating: {product.rating}</p>*/}
-                                           </Box>
-                                       </Grid>
-                                   ))
-                               }
-                           </Grid>
-                       </Box>
-                   </Grid>
-               </Grid>
-           </Box>
+                            {
+                                data.length === 0 ? (
+                                    <Box mt={2} width={'100%'} height={'80vh'} display={'flex'} justifyContent={'center'} alignItems={'center'} flexDirection={'column'}>
+                                        <img src={'/images/empty.svg'} alt={'percentage'} height={'220px'} />
+                                        <Box mt={3} fontSize={'22px'}>
+                                            Found Nothing!
+                                        </Box>
+                                    </Box>
+                                ) : (
+                                    <Grid container spacing={4} px={{md: 3, xs: 1}}>
+                                        {
+                                            data.map((each) => (
+                                                <Grid id={each.id} key={each.id} item xs={12} sm={6} md={3}>
+                                                    <ProductCard each={each}/>
+                                                </Grid>
+                                            ))
+                                        }
+                                    </Grid>
+                                )
+                            }
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Box>
         </>
     );
 };

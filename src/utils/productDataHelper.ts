@@ -22,8 +22,9 @@ const productDataGenerator = () => {
         const originalPrice = sellingPrice + (sellingPrice * 0.2);
         const brand = generateRandomBrand();
         const rating = generateRandomRating();
-        const img = faker.image.abstract(680, 480, true)
-        tempData.push({id, name, originalPrice, sellingPrice, brand, rating, img });
+        const reviews = Math.floor(Math.random() * 900) + 100;
+        const img = faker.image.abstract(480, 600, true)
+        tempData.push({id, name, originalPrice, sellingPrice, brand, rating, reviews, img });
     }
 
    return tempData;

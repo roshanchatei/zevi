@@ -1,4 +1,4 @@
-import {Box, Grid, Skeleton} from "@mui/material";
+import {Box, Grid, Hidden, Skeleton} from "@mui/material";
 import {useEffect, useState} from "react";
 import {faker} from "@faker-js/faker";
 
@@ -35,33 +35,35 @@ const Index = (props: any) => {
 
     return (
         <>
-            <Box mb={1} fontSize={'18px'} fontWeight={600}>
-                Latest Trends
-            </Box>
-            {
-                products.length > 0 && (
-                    <Grid container spacing={3} >
-                        {
-                            products.map((each, index) => (
-                                <Grid key={index} item xs={2.4} sx={{cursor: 'pointer'}}>
-                                    {loading && <Skeleton variant="rectangular" width={'100%'} height={200} />}
-                                    <img
-                                        src={each?.img}
-                                        alt="Picture of the author"
-                                        width={'100%'}
-                                        onLoad={handleImageLoad}
-                                        // height={500}
-                                    />
-                                    <Box fontSize={'14px'} color={'#545454'} width={'100%'} overflow={'hidden'} textOverflow={'ellipsis'} whiteSpace={'nowrap'}>
-                                        {each.name}
-                                    </Box>
-                                </Grid>
-                            ))
-                        }
-                    </Grid>
-                )
-            }
-            <Box mt={3} fontSize={'18px'} fontWeight={600}>
+            <Hidden mdDown>
+                <Box mb={1} fontSize={'18px'} fontWeight={600}>
+                    Latest Trends
+                </Box>
+                {
+                    products.length > 0 && (
+                        <Grid container spacing={3} mb={3}>
+                            {
+                                products.map((each, index) => (
+                                    <Grid key={index} item xs={2.4} sx={{cursor: 'pointer'}}>
+                                        {loading && <Skeleton variant="rectangular" width={'100%'} height={200} />}
+                                        <img
+                                            src={each?.img}
+                                            alt="picture"
+                                            width={'100%'}
+                                            onLoad={handleImageLoad}
+                                            // height={500}
+                                        />
+                                        <Box fontSize={'14px'} color={'#545454'} width={'100%'} overflow={'hidden'} textOverflow={'ellipsis'} whiteSpace={'nowrap'}>
+                                            {each.name}
+                                        </Box>
+                                    </Grid>
+                                ))
+                            }
+                        </Grid>
+                    )
+                }
+            </Hidden>
+            <Box fontSize={'18px'} fontWeight={600}>
                 Popular Suggestions
             </Box>
             <Box mt={1}>

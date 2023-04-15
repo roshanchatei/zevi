@@ -48,7 +48,6 @@ export default function Home() {
     // }, [isFocused]);
 
     const handleSearch = async () => {
-        localStorage.setItem("search-query", search);
         await Router.push('/search')
     }
 
