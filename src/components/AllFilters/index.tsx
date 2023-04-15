@@ -14,7 +14,7 @@ import StarIcon from '@mui/icons-material/Star';
 import {useState} from "react";
 
 const Index = (props: any) => {
-    const {mainRef, filter, setFilter} = props
+    const {data, mainRef, filter, setFilter} = props
 
     const handleChangeFilter = (e, each, filterName) => {
         mainRef.current.scrollTo({
@@ -161,14 +161,16 @@ const Index = (props: any) => {
                             </Grid>
                         </Grid>
                         <Box mt={1} />
-                        <Slider
-                            value={filter.priceFilter}
-                            onChange={handleChangeFilterSlider}
-                            // valueLabelDisplay="auto"
-                            min={0}
-                            max={100}
-                            size={'medium'}
-                        />
+                        <Box width={'100%'} px={1}>
+                            <Slider
+                                value={filter.priceFilter}
+                                onChange={handleChangeFilterSlider}
+                                // valueLabelDisplay="auto"
+                                min={0}
+                                max={100}
+                                size={'medium'}
+                            />
+                        </Box>
                     </AccordionDetails>
                 </Accordion>
             </Box>

@@ -73,14 +73,14 @@ const Index = (props: any) => {
                             alignItems: "center",
                             justifyContent: "space-between",
                             px: 2,
-                            pt: 6,
+                            pt: 4,
                             pb: 3,
                         }}
                         onClick={() => {
                             setMobOpen(false);
                         }}
                     >
-                        <Box>
+                        <Box fontWeight={700} fontSize={'20px'} color={'#319EFF'}>
                             Filters
                         </Box>
                         <IconButton onClick={handleMobDrawer}>

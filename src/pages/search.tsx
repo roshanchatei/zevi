@@ -1,6 +1,6 @@
 import {Box, Grid, Hidden,} from "@mui/material";
 import {useEffect, useRef, useState} from "react";
-import {brandData, productDataGenerator, starData} from "@/utils/productDataHelper";
+import {productDataGenerator} from "@/utils/productDataHelper";
 import AllFilters from "@/components/AllFilters";
 import Navbar from "@/components/Navbar";
 import ProductCard from "@/components/ProductCard";
@@ -21,9 +21,7 @@ const Index = () => {
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-
         setInitial(productDataGenerator());
-
     }, []);
 
     useEffect(() => {
@@ -52,7 +50,7 @@ const Index = () => {
                     <Hidden mdDown>
                         <Grid item xs={0} md={2.5} height={'90vh'} overflow={'hidden'}>
                             <Box width={'100%'} overflow={'hidden'} height={'90vh'}>
-                                <AllFilters mainRef={mainRef} filter={filter} setFilter={setFilter} />
+                                <AllFilters mainRef={mainRef} data={data} filter={filter} setFilter={setFilter} />
                             </Box>
                         </Grid>
                     </Hidden>
@@ -71,7 +69,7 @@ const Index = () => {
                                     <Grid container spacing={4} px={{md: 3, xs: 1}}>
                                         {
                                             data.map((each) => (
-                                                <Grid id={each.id} key={each.id} item xs={12} sm={6} md={3}>
+                                                <Grid id={each.id} key={each.id} item xs={6} sm={6} md={3}>
                                                     <ProductCard each={each}/>
                                                 </Grid>
                                             ))
