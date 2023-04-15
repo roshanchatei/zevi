@@ -2,7 +2,7 @@ import {Box, Grid, Skeleton} from "@mui/material";
 import {useEffect, useState} from "react";
 import {faker} from "@faker-js/faker";
 
-const Index = ({dialogRef}) => {
+const Index = ({dialogRef, setSearch}) => {
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -23,6 +23,14 @@ const Index = ({dialogRef}) => {
     const handleImageLoad = () => {
         setLoading(false);
     };
+
+    const popular = [
+        'Nature',
+        'Wildlife',
+        'Abstract',
+        'Business',
+        'Solid'
+    ]
 
     return (
         <>
@@ -69,7 +77,7 @@ const Index = ({dialogRef}) => {
                         products.length > 0 && (
                             <>
                                 {
-                                    products.map((each, index) => (
+                                    popular.map((each, index) => (
                                         <Box
                                             mb={0.3} key={index} fontSize={'14px'} color={'#545454'}
                                             sx={{
@@ -78,8 +86,9 @@ const Index = ({dialogRef}) => {
                                                 },
                                                 cursor: 'pointer'
                                             }}
+                                            onClick={() => setSearch(each.toLowerCase())}
                                         >
-                                            {faker.commerce.productName()}
+                                            {each}
                                         </Box>
                                     ))
                                 }

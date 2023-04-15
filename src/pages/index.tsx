@@ -2,9 +2,12 @@ import {Box, Container, Dialog, Slide, TextField} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React, {useEffect, useRef, useState} from "react";
 import HomeDialog from "@/components/HomeDialog";
+import {useRouter} from "next/router";
 
 
 export default function Home() {
+
+    const Router = useRouter();
 
     const [isFocused, setIsFocused] = useState(false);
     const handleFocus = () => {
@@ -15,7 +18,9 @@ export default function Home() {
     }
 
     const dialogRef = useRef(null);
+
     const inputRef = useRef(null);
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -41,6 +46,11 @@ export default function Home() {
     //         inputRef.current.focus();
     //     }
     // }, [isFocused]);
+
+    const handleSearch = async () => {
+        localStorage.setItem("search-query", search);
+        await Router.push('/search')
+    }
 
     return (
         <>
@@ -73,14 +83,27 @@ export default function Home() {
                         size={"medium"}
                         placeholder={"Search"}
                         InputProps={{
-                            startAdornment: <SearchIcon sx={{mr: 2}} />,
+                            // startAdornment: <SearchIcon sx={{mr: 2}} />,
                             disableUnderline: true,
+                            endAdornment: (
+                                <>
+                                    {search.length > 0 && (
+                                        <Box pt={0.3} sx={{cursor: 'pointer'}} onClick={handleSearch}>
+                                            <SearchIcon />
+                                        </Box>
+                                    )}
+                                </>
+                            ),
                         }}
                         onFocus={handleFocus}
                         ref={inputRef}
+                        value={search}
+                        onChange={(event) => {
+                            setSearch(event.target.value);
+                        }}
                     />
                 </Container>
-                <HomeDialog dialogRef={dialogRef} />
+                <HomeDialog dialogRef={dialogRef} setSearch={setSearch} />
                 {/*<Slide direction="up" in={isFocused} mountOnEnter unmountOnExit>*/}
                 {/*    <HomeDialog dialogRef={dialogRef} />*/}
                 {/*</Slide>*/}
