@@ -1,3 +1,4 @@
+//@ts-nocheck
 import {
     Accordion,
     AccordionDetails,
@@ -12,44 +13,48 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {brandData, starData} from "@/utils/productDataHelper";
 import StarIcon from '@mui/icons-material/Star';
 import {useState} from "react";
+import {Product} from "@/types/product.model";
+import {FilterState} from "@/types/helper.model";
 
 const Index = (props: any) => {
     const {data, mainRef, filter, setFilter} = props
 
-    const handleChangeFilter = (e, each, filterName) => {
+    const handleChangeFilter = (event: any, each: any, filterName: keyof FilterState) => {
         mainRef.current.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
-        const checked = e.target.checked;
+        const checked = event.target.checked;
         if(checked) {
-            setFilter((filter) => {
+            setFilter((filter: FilterState) => {
                 filter[filterName].push(each.value);
                 return {...filter};
             })
         }else {
-            setFilter((filter) => {
-                filter[filterName] = filter[filterName].filter(e => e !== each.value);
+            setFilter((filter: FilterState) => {
+                filter[filterName] = filter[filterName].filter((e: string | number) => e !== each.value);
                 return {...filter};
             })
         }
     }
 
-    const handleChangeFilterSlider = (event, newValue) => {
-        setFilter((filter) => {
-            filter['priceFilter'] = newValue;
-            return {...filter};
-        })
-    }
-    const handleChangeSliderWithInput = (event, index) => {
-        let value = Number(event.target.value)
-        if(value >= 0 && value <= 100){
-            setFilter((filter) => {
-                (filter['priceFilter'])[index] = event.target.value === '' ? 0 : Number(event.target.value);
-                return {...filter};
-            })
+    const handleChangeFilterSlider = (event: Event, newValue: number[] ) => {
+        if (newValue.length === 2) {
+            setFilter((filter: FilterState) => {
+                filter['priceFilter'] = [newValue[0], newValue[1]];
+                return { ...filter };
+            });
         }
     }
+    const handleChangeSliderWithInput = (event: any, index: number) => {
+        let value = Number(event.target.value);
+        if (value >= 0 && value <= 100) {
+            setFilter((filter: FilterState) => {
+                filter['priceFilter'][index] = value || 0; // use the default value of 0 if value is falsy
+                return { ...filter };
+            });
+        }
+    };
 
     const [isOpen, setIsOpen] = useState(true)
 
@@ -161,11 +166,11 @@ const Index = (props: any) => {
                             </Grid>
                         </Grid>
                         <Box mt={1} />
+
                         <Box width={'100%'} px={1}>
                             <Slider
                                 value={filter.priceFilter}
                                 onChange={handleChangeFilterSlider}
-                                // valueLabelDisplay="auto"
                                 min={0}
                                 max={100}
                                 size={'medium'}

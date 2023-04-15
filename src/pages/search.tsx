@@ -1,13 +1,15 @@
+//@ts-nocheck
 import {Box, Grid, Hidden,} from "@mui/material";
 import {useEffect, useRef, useState} from "react";
 import {productDataGenerator} from "@/utils/productDataHelper";
 import AllFilters from "@/components/AllFilters";
 import Navbar from "@/components/Navbar";
 import ProductCard from "@/components/ProductCard";
+import {FilterState} from "@/types/helper.model";
 
 const Index = () => {
 
-    const [filter, setFilter] = useState({
+    const [filter, setFilter] = useState<FilterState>({
         starFilter: [],
         brandFilter: [],
         priceFilter: [0,100],

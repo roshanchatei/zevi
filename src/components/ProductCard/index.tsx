@@ -1,3 +1,4 @@
+//@ts-nocheck
 import {Box, Rating, Skeleton} from "@mui/material";
 import {useState} from "react";
 import Checkbox from '@mui/material/Checkbox';

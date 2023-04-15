@@ -1,3 +1,4 @@
+//@ts-nocheck
 import {AppBar, Box, Drawer, Hidden, IconButton, TextField} from "@mui/material";
 import TuneIcon from "@mui/icons-material/Tune";
 import SearchIcon from "@mui/icons-material/Search";

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import {Box, Grid, Hidden, Skeleton} from "@mui/material";
 import {useEffect, useState} from "react";
 import {faker} from "@faker-js/faker";

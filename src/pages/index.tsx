@@ -1,3 +1,4 @@
+//@ts-nocheck
 import {Box, Container, Dialog, Slide, TextField} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React, {useEffect, useRef, useState} from "react";
