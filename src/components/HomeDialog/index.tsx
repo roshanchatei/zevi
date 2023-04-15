@@ -6,9 +6,11 @@ import {faker} from "@faker-js/faker";
 const Index = (props: any) => {
     const { setSearch } = props;
 
+    //demo products
     const [products, setProducts] = useState([] as Array<object>);
     const [loading, setLoading] = useState(true);
 
+    //generating products data using faker api
     useEffect(() => {
         const tempData : Array<object> = [];
 
@@ -26,6 +28,7 @@ const Index = (props: any) => {
         setLoading(false);
     };
 
+    //dummy popular data
     const popular = [
         'Nature',
         'Wildlife',

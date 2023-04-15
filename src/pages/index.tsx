@@ -10,12 +10,10 @@ export default function Home() {
 
     const Router = useRouter();
 
+    //state to know if the search field is focused
     const [isFocused, setIsFocused] = useState(false);
     const handleFocus = () => {
         setIsFocused(true);
-    }
-    const handleBlur = () => {
-        setIsFocused(false);
     }
 
     const dialogRef = useRef(null);
@@ -23,6 +21,7 @@ export default function Home() {
     const inputRef = useRef(null);
     const [search, setSearch] = useState('');
 
+    //helper to hide the dialog when we click outside inputRef & dialogRef
     useEffect(() => {
         function handleClickOutside(event) {
             if (
@@ -77,13 +76,11 @@ export default function Home() {
                             py: 1.3,
                             px: 2,
                             borderRadius: "10px",
-                            // boxShadow: "0px 4px 31px rgba(0, 0, 0, 0.08)",
                         }}
                         variant="standard"
                         size={"medium"}
                         placeholder={"Search"}
                         InputProps={{
-                            // startAdornment: <SearchIcon sx={{mr: 2}} />,
                             disableUnderline: true,
                             endAdornment: (
                                 <>
@@ -103,7 +100,6 @@ export default function Home() {
                         }}
                     />
                 </Container>
-                {/*<HomeDialog dialogRef={dialogRef} setSearch={setSearch} />*/}
                 <Slide direction="up" in={isFocused} mountOnEnter unmountOnExit>
                     <Box
                         ref={dialogRef}

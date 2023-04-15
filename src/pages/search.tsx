@@ -17,15 +17,16 @@ const Index = () => {
 
     const mainRef = useRef(null);
 
-
     const [initial, setInitial] = useState([])
     const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
 
+    //initialising products data using faker api
     useEffect(() => {
         setInitial(productDataGenerator());
     }, []);
 
+    //filtering data
     useEffect(() => {
         let _data = initial;
         if(search.length > 0){

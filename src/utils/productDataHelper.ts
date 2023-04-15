@@ -1,5 +1,6 @@
 import {faker} from "@faker-js/faker";
 
+//product data generator
 const productDataGenerator = () => {
     const tempData = [];
 

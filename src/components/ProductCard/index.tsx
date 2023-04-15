@@ -8,11 +8,13 @@ import Favorite from '@mui/icons-material/Favorite';
 const Index = (props:any) => {
     const {each} = props;
 
+    //image helper state
     const [loading, setLoading] = useState(true);
     const handleImageLoad = () => {
         setLoading(false);
     };
 
+    //view product button helpers
     const [isHovering, setIsHovering] = useState(false);
     const handleMouseEnter = () => {
         setIsHovering(true);
