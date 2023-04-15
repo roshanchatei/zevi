@@ -5,6 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from '@mui/icons-material/Close';
 import StarIcon from '@mui/icons-material/Star';
 import {brandData, starData} from "@/utils/productDataHelper";
+import AllFilters from "@/components/AllFilters";
 
 const Index = () => {
 
@@ -69,12 +70,14 @@ const Index = () => {
            <Box width={'100%'} mt={10}>
                <Grid container spacing={0} height={'auto'}>
                    <Hidden mdDown>
-                       <Grid item xs={0} md={3} height={'90vh'} overflow={'hidden'}>
-                           Filter
+                       <Grid item xs={0} md={2.5} height={'90vh'} overflow={'hidden'}>
+                           <AllFilters mainRef={mainRef} filter={filter} setFilter={setFilter} />
                        </Grid>
                    </Hidden>
-                   <Grid item xs={12} md={9}>
-                       Products
+                   <Grid item xs={12} md={9.5}>
+                       <Box width={'100%'}  ref={mainRef}>
+
+                       </Box>
                    </Grid>
                </Grid>
            </Box>

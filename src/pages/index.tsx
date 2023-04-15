@@ -103,10 +103,20 @@ export default function Home() {
                         }}
                     />
                 </Container>
-                <HomeDialog dialogRef={dialogRef} setSearch={setSearch} />
-                {/*<Slide direction="up" in={isFocused} mountOnEnter unmountOnExit>*/}
-                {/*    <HomeDialog dialogRef={dialogRef} />*/}
-                {/*</Slide>*/}
+                {/*<HomeDialog dialogRef={dialogRef} setSearch={setSearch} />*/}
+                <Slide direction="up" in={isFocused} mountOnEnter unmountOnExit>
+                    <Box
+                        ref={dialogRef}
+                        mt={3}
+                        width={{md: '80%', xs: '100%'}}
+                        bgcolor={"#FFF"}
+                        borderRadius={'6px'}
+                        p={4}
+                        boxShadow={'5px 20px 31px rgba(0, 0, 0, 0.2)'}
+                    >
+                        <HomeDialog setSearch={setSearch} />
+                    </Box>
+                </Slide>
             </Box>
         </>
     )
