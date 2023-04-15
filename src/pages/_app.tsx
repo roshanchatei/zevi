@@ -4,6 +4,9 @@ import {SnackbarProvider} from "notistack";
 import Head from "next/head";
 import {Box, CssBaseline} from "@mui/material";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -30,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
               },
           })}>
           <CssBaseline />
-          <Box width={'100%'} height={'100%'}>
+          <Box className={inter.className} width={'100%'} height={'100%'}>
             <Component {...pageProps} />
           </Box>
         </ThemeProvider>
