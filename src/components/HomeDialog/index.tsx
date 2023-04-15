@@ -2,7 +2,8 @@ import {Box, Grid, Skeleton} from "@mui/material";
 import {useEffect, useState} from "react";
 import {faker} from "@faker-js/faker";
 
-const Index = ({dialogRef, setSearch}) => {
+const Index = (props: any) => {
+    const { dialogRef, setSearch } = props;
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
