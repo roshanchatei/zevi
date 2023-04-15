@@ -11,6 +11,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {brandData, starData} from "@/utils/productDataHelper";
 import StarIcon from '@mui/icons-material/Star';
+import {useState} from "react";
 
 const Index = (props: any) => {
     const {mainRef, filter, setFilter} = props
@@ -50,10 +51,12 @@ const Index = (props: any) => {
         }
     }
 
+    const [isOpen, setIsOpen] = useState(true)
+
     return (
         <>
             <Box width={'100%'}>
-                <Accordion sx={{background: 'transparent', boxShadow: 0}}>
+                <Accordion expanded={isOpen} onChange={() => setIsOpen(!isOpen)} sx={{background: 'transparent', boxShadow: 0}}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                     >
