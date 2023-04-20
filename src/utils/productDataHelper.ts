@@ -16,7 +16,7 @@ const productDataGenerator = () => {
         return rating / 10;
     }
 
-    for (let i = 0; i < 250 ; i++) {
+    for (let i = 0; i < 100 ; i++) {
         const id = Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
         const name = faker.commerce.productName();
         const sellingPrice = parseInt(faker.commerce.price(0, 100));
